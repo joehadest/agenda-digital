@@ -1,5 +1,6 @@
 /**
  * Script para verificar se todos os arquivos de favicon necessários existem
+ * e se os caminhos nos arquivos HTML estão corretos
  */
 const fs = require('fs');
 const path = require('path');
@@ -7,6 +8,7 @@ const path = require('path');
 console.log('=== VERIFICANDO ARQUIVOS DE FAVICON ===\n');
 
 const faviconDir = path.join(__dirname, '..', 'frontend', 'favicon');
+const htmlDir = path.join(__dirname, '..', 'frontend');
 
 // Verificar se o diretório de favicons existe
 if (!fs.existsSync(faviconDir)) {
@@ -40,6 +42,26 @@ requiredFavicons.forEach(favicon => {
     } else {
         console.log(`❌ ${favicon.description} não encontrado: ${favicon.file}`);
         missingFiles++;
+    }
+});
+
+// Verificar referências nas páginas HTML
+console.log('\n=== VERIFICANDO REFERÊNCIAS NOS ARQUIVOS HTML ===');
+
+const htmlFiles = ['index.html', 'login.html', 'register.html'];
+const correctFaviconPath = './favicon/favicon.ico';
+
+htmlFiles.forEach(htmlFile => {
+    const filePath = path.join(htmlDir, htmlFile);
+    if (fs.existsSync(filePath)) {
+        const content = fs.readFileSync(filePath, 'utf8');
+        if (content.includes(correctFaviconPath)) {
+            console.log(`✅ ${htmlFile} tem o caminho correto para o favicon`);
+        } else {
+            console.log(`❌ ${htmlFile} pode ter um caminho incorreto para o favicon`);
+        }
+    } else {
+        console.log(`⚠️ Arquivo HTML não encontrado: ${htmlFile}`);
     }
 });
 
