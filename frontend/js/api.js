@@ -3,10 +3,15 @@
  */
 class AgendaAPI {
     constructor() {
-        // URL base da API
-        this.baseURL = 'http://localhost:3000/api';
+        // Detectar ambiente automaticamente
+        const isProduction = window.location.hostname !== 'localhost' &&
+            !window.location.hostname.includes('127.0.0.1');
 
-        // Verificar se já existe um token de autenticação
+        // URL base da API
+        this.baseURL = isProduction
+            ? '/api' // No Vercel, usamos caminho relativo
+            : 'http://localhost:3000/api'; // Em desenvolvimento, usamos localhost
+
         this.token = localStorage.getItem('auth_token');
     }
 
