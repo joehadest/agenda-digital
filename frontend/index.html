@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Digital</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Agenda Digital</span>
+            </div>
+            <div class="user-info">
+                <span id="user-name">Olá, usuário</span>
+                <button id="logout-btn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="app-section">
+            <div class="sidebar">
+                <!-- Formulário para novo compromisso -->
+                <div class="form-container">
+                    <h2><i class="fas fa-plus-circle"></i> Novo Compromisso</h2>
+                    <form id="event-form">
+                        <div class="form-group">
+                            <label for="event-title">Título:</label>
+                            <input type="text" id="event-title" required placeholder="Título do compromisso">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-date">Data:</label>
+                            <input type="date" id="event-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-time">Hora:</label>
+                            <input type="time" id="event-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-description">Descrição:</label>
+                            <textarea id="event-description" rows="3" placeholder="Detalhes do compromisso"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-notification">Notificar:</label>
+                            <select id="event-notification">
+                                <option value="0">No momento</option>
+                                <option value="5">5 minutos antes</option>
+                                <option value="15">15 minutos antes</option>
+                                <option value="30">30 minutos antes</option>
+                                <option value="60">1 hora antes</option>
+                                <option value="1440">1 dia antes</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Salvar
+                        </button>
+                        <button type="button" id="btn-clear" class="btn-secondary">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- Filtro por data -->
+                <div class="filter-container">
+                    <div class="filter">
+                        <label for="filter-date">Filtrar por data:</label>
+                        <input type="date" id="filter-date">
+                        <button id="btn-clear-filter" class="btn-secondary">Limpar</button>
+                    </div>
+                </div>
+
+                <!-- Lista de compromissos -->
+                <div class="events-list-container">
+                    <h2><i class="fas fa-list"></i> Meus Compromissos</h2>
+                    <div id="loading" class="loading">Carregando...</div>
+                    <ul id="events-list" class="events-list">
+                        <!-- Os compromissos serão carregados aqui via JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Agenda Digital. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
